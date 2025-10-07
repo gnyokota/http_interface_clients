@@ -57,5 +57,4 @@ public class ArticleController {
     public void deleteArticle(@RequestBody Integer id){
         articlesList.removeIf(article -> article.id().equals(id));
     }
-//    11:22
 }
