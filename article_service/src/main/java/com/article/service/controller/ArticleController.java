@@ -41,5 +41,21 @@ public class ArticleController {
         return article;
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Article> updateArticle(@PathVariable Integer id, @RequestBody Article updatedArticle){
+        for (int i = 0; i < articlesList.size(); i++) {
+            if(articlesList.get(i).id().equals(id)){
+                articlesList.set(i, updatedArticle);
+                return ResponseEntity.ok(updatedArticle);
+            }
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteArticle(@RequestBody Integer id){
+        articlesList.removeIf(article -> article.id().equals(id));
+    }
 //    11:22
 }
