@@ -2,6 +2,7 @@ package com.article.service.controller;
 
 import com.article.service.model.Article;
 import jakarta.annotation.PostConstruct;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,10 +35,10 @@ public class ArticleController {
     }
 
     @PostMapping
-    public ResponseEntity<Article> createArticle(@RequestBody Article article){
+    @ResponseStatus(HttpStatus.CREATED)
+    public Article createArticle(@RequestBody Article article){
         articlesList.add(article);
-        URI location = URI.create("/articles/" + article.id());
-        return ResponseEntity.created(location).body(article);
+        return article;
     }
 
 //    11:22
